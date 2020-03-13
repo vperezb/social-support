@@ -1,0 +1,10 @@
+<header><a href="/"><h2>Inicio</h2></a></header>
+<div id="firebaseui-auth-container"></div>
+
+<button id="sign-out" hidden=true>Sign Out</button>
+
+<div id="login-info" hidden=true>
+  {% if user_data %}
+    <p>Usuari: {{ user_data['email'] }}</p>
+  {% endif %}
+</div>

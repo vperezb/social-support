@@ -1,0 +1,33 @@
+<title>SocialSuport [ES] - COVID-19</title>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+
+
+<script>
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyC5E9RhNjYYke9l1kEtjeKqAsINIIkqY98",
+  authDomain: "suportsocial.firebaseapp.com",
+  databaseURL: "https://suportsocial.firebaseio.com",
+  projectId: "suportsocial",
+  storageBucket: "suportsocial.appspot.com",
+  messagingSenderId: "803721971155",
+  appId: "1:803721971155:web:3394bbb938d15109f49b26",
+  measurementId: "G-E2WL0SDT5Z"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+</script>
+<!-- [START gae_python37_auth_include_firebaseui] -->
+<script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css">
+<!-- [END gae_python37_auth_include_firebaseui] -->
+<link rel='icon' href='{{ url_for('static', filename='favicon.ico') }}' type='image/x-icon'/ >
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">

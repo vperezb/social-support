@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include '/default_head.html' %}
+  </head>
+  <body>
+  {% include '/header.html' %}
+    
+    <h3>Ofrece tu ayuda - Busca necessidades cerca de tu zona</h3>
+    <button onclick="copyUrlToClipboard()">Compartir página de búsqueda</button>
+    <p>Mou el mapa i selecciona la teva zona de preferència</p>
+    <!--The div element for the map -->
+    Cerca la teva població: <input id="pac-input" class="controls" type="text" placeholder="Search Box"><small>({{zone.lat}},{{zone.lng}})</small>
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  var center = new google.maps.LatLng({{zone.lat}}, {{zone.lng}});
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: {{zone.zoom}}, center: center});
+  
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  //var searchBox = new google.maps.places.SearchBox(input);
+  
+  var locations = [
+    {% for need in needs %}
+    [{{need.lat}}, {{ need.lng }}, '{{ need.id }}'],
+    {% endfor %}
+    ]
+   
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+        map: map
+      });
+      //marker.metadata = {id: locations[i][2]};
+      marker.set("id", locations[i][2]);
+    }
+
+    marker.addListener('click', function() {
+          alert(marker.getPosition());
+        });
+
+        var circle = new google.maps.Circle({
+            center: center,
+            radius: {{zone.radius}},
+          editable: true,          
+          draggable: true,
+
+        });
+        circle.setMap(map);
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{context.key}}&callback=initMap">
+    </script>
+
+<button>Refresca la llista</button>
+
+
+
+<script>
+    function copyUrlToClipboard() {
+        var dummy = document.createElement('input'),
+            text = window.location.href;
+        document.body.appendChild(dummy);
+        text = text + '&utm_medium=share';
+        dummy.value = text
+        dummy.select();
+        document.execCommand('copy');
+        alert("Enllaç copiat, pots compartir-lo per Watsapp, mail...: ");
+        document.body.removeChild(dummy);
+    }
+</script>
+</body>
+</html>
