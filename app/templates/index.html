@@ -1,37 +1,30 @@
 <!doctype html>
-<html>
+<html class="has-navbar-fixed-top">
+
 <head>
   {% include '/default_head.html' %}
 </head>
+
 <body>
-{% include '/header.html' %}
+  {% include '/header.html' %}
 
-<h2>¿Cómo funciona?</h2>
 
-<h3>Si necesitas ayuda</h3>
-<button onclick="window.location.href = '/need';">Necesito ayuda</button>
-<p>
-  <ul>
-    <li>Publica tu necesidad, te pediremos un correo.</li>
-    <li>Podrás consultar en tu área privada </li>
-    <li>Recibirás hasta un máximo de 3 ofrecimientos, tras esos 3 se desactivará el anuncio</li>
-    <li>Si estás deacuerdo con la ayuda, tu decides a quien escribes. Si no te da seguridad, vuelves a activar la solicitud</li>
-  </ul>
-</p>
-<h3>Si puedes ayudar</h3>
-<button class='to_offer' type="button" onclick="window.location.href = '/offer';">Puedo ayudar</button>
-<p>
-  <ul>
-    <li>Busca necesidades CERCA de tu domicilio</li>
-    <li>Ofrécete a ayudar, adjunta un texto y tus datos de contacto a tu solicitud</li>
-    <li>Nosotros nos pondremos en contacto con la persona a ayudar, quien podrá elegir al voluntario que más le corresponda</li>
-    <li>Podrás ofrecer tu ayuda a 2 necesidades sin respuesta. Si no responden, en un día se liberará.</li>
-  </ul>
-</p>
-<h2>Links de interés</h2>
 
-<h3>Troba la teva ciutat</h3>
-<a href="/offer?z=41.501576,2.347731,12,1500">Premià de Dalt</a>
-{% include '/footer.html' %}
+  <!-- Init container-->
+
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        {% include '/cards/NeedCard.html' %}
+      </div>
+      <div class="column">
+        {% include '/cards/OfferCard.html' %}
+      </div>
+    </div>
+
+
+    <!--End Container-->
+
 </body>
+
 </html>
