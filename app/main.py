@@ -105,12 +105,12 @@ def stored_enroll_form():
 
 @app.route('/stored_need', methods=['POST'])
 def stored_need_form():
-    lat = request.form['lat']
-    lng = request.form['lng']
+    lat = float(request.form['lat'])
+    lng = float(request.form['lng'])
     email = request.form['email']
     title = request.form['title']
     description = request.form['description']
-    type = 'other'
+    type = request.form['type']
     store_need(email, lat, lng, title, description, type)
     return render_template(
         'need_detail.html', need = {
