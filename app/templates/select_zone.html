@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include '/default_head.html' %}
+  </head>
+  <body>
+  {% include '/header.html' %}
+    
+    <h3>Ofrece tu ayuda - Selecciona tu zona de acción</h3>
+    <p>Muévete por el mapa o busca y selecciona una zona <b>cercana a tu domicilio</b></p>
+    <!--The div element for the map -->
+    Selecciona tu zona: <input id="query-box" class="controls" type="text" placeholder="Pueblo o barrio"> | 
+    Distancia (max. 2000 metros): <input id="distance" name="distance" class="controls" type="number" placeholder="" value="1000" max="2000">
+    <br>
+    <div id="map"></div>
+    <button onclick="selectOfferZone()">Seleccionar esta zona</button>
+    <script>
+      function initAutocomplete() {
+          var center = {lat: 39.9776665, lng: -4.7622723}
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: center,
+          zoom: 6,
+          mapTypeId: 'roadmap',
+          zoomControl: true,
+          mapTypeControl: false,
+          scaleControl: true,
+          streetViewControl: false,
+          rotateControl: true,
+          fullscreenControl: true
+        });
+
+        var circle = new google.maps.Circle({
+                center: center,
+                radius: Number(document.getElementById('distance').value),
+                editable: true,          
+                draggable: true,
+            });
+
+        circle.setMap(map);
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('query-box');
+        var searchBox = new google.maps.places.SearchBox(input);
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            
+            circle.setCenter(place.geometry.location)
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+
+          });
+          map.fitBounds(bounds);
+        });
+
+        google.maps.event.addListener(circle, 'radius_changed', function() {
+            if (circle.getRadius() > 2000){
+                circle.setRadius(2000);
+            }
+            document.getElementById('distance').value = circle.getRadius();
+        });
+
+        google.maps.event.addListener(circle, 'center_changed', function() {
+            var circleCenter = circle.getCenter();
+            document.getElementById('lat').value = circleCenter.lat(); //latitude
+            document.getElementById('lng').value = circleCenter.lng(); //longitude
+        });
+        
+        map.addListener('click', function(event) {                
+            //Get the location that the user clicked.
+            var clickedLocation = event.latLng;
+            circle.setCenter(clickedLocation);
+            });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{context.key}}&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <form>
+        <input type="text" name="lat" id="lat" readonly="yes" hidden>
+        <input type="text" name="lng" id="lng" readonly="yes" hidden>
+        <input type="text" name="zoom" id="zoom" readonly="yes" hidden>
+    <form>
+
+<script>
+
+function selectOfferZone() {
+    var lat = document.getElementById('lat').value;
+    var lng = document.getElementById('lng').value;
+    var distance = document.getElementById('distance').value
+    var zoom = 12;
+    createCookie('zone', [lat, lng, zoom, distance].join(','), 60)
+    window.location.href = '/offer?z=' + [lat, lng, zoom, distance].join(',');
+}
+
+</script>
+
+
+{% include '/footer.html' %}
+</body>
+</html>

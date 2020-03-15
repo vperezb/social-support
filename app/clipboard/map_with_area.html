@@ -1,0 +1,56 @@
+<p>Muévete por el mapa y selecciona una zona cercana a tu domicilio</p>
+    <!--The div element for the map -->
+    Cerca la teva població: <input id="pac-input" class="controls" type="text" placeholder="Search Box"><small>({{zone.lat}},{{zone.lng}})</small>
+    <div id="map"></div>
+    
+    <script>
+    //createCookie('zone', '41.501576,2.347731,12,1500', 24)
+// Initialize and add the map
+function initMap() {
+  var center = new google.maps.LatLng({{zone.lat}}, {{zone.lng}});
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: {{zone.zoom}}, center: center});
+  
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  //var searchBox = new google.maps.places.SearchBox(input);
+  
+  var locations = [
+    {% for need in needs %}
+    [{{need.lat}}, {{ need.lng }}, '{{ need.id }}'],
+    {% endfor %}
+    ]
+   
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+        map: map
+      });
+      //marker.metadata = {id: locations[i][2]};
+      marker.set("id", locations[i][2]);
+    }
+
+    marker.addListener('click', function() {
+          alert(marker.getPosition());
+        });
+
+        var circle = new google.maps.Circle({
+            center: center,
+            radius: {{zone.radius}},
+          editable: true,          
+          draggable: true,
+
+        });
+        circle.setMap(map);
+
+        google.maps.event.addListener(circle, 'radius_changed', function() {
+          console.log(circle.getRadius());
+        });
+
+        google.maps.event.addListener(circle, 'center_changed', function() {
+          console.log(circle.getCenter());
+        });
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{context.key}}&callback=initMap">
+    </script>

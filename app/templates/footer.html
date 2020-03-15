@@ -1,0 +1,22 @@
+<footer>
+<p>
+    <ul>
+        <li>
+            <a href="#">Github</a>
+        </li>
+        <li>
+            <a href="/support_us">Ayúdanos</a>
+        </li>
+    </ul>
+</p>
+</footer>
+<script>
+    zone = getCookie('zone')
+    if (zone){
+      elements = document.getElementsByClassName('to_offer');
+      for (var i=0, im=elements.length; im>i; i++) {
+        elements[i].setAttribute("onclick", "window.location.href = '/offer?z=" + zone + "';");
+      }
+    }
+</script>
+    

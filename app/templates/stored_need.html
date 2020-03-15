@@ -1,21 +1,25 @@
+<!DOCTYPE html>
 <html>
- <head>
-   <title>Submitted form</title>
-   <link rel="stylesheet" type="text/css" href="/static/style.css">
- </head>
- <body>
-   <div id="container">
-     <div class="pagetitle">
-       <h1>Form submitted</h1>
-     </div>
-     <div id="main">
-       <p>Thanks for your submission, {{name}}!</p>
-       <p>Here's a review of the information that you sent:</p>
+  <head>
+    <title>SocialSuport [ES] - COVID-19</title>
+    <link rel='icon' href='{{ url_for('static', filename='favicon.ico') }}' type='image/x-icon'/ >
+  </head>
+  <body>
+  {% include '/header.html' %}
+    <div id="container">
+          <div class="pagetitle">
+        <h2>Tu publicación se ha guardado correctamente.</h2>
+      </div>
+      <div id="main">
+       <p>Esta es la información de tu publicación</p>
+       <p>Recibirás un correo con un enlace para activar/desactivar la publicación</p>
+       <p>Pasadas 24h sin actividad se procederá a desactivar. Podrás activar de nuevo desde el enlace del correo</p>
        <p>
-          <strong>Name</strong>: {{name}} <br>
-          <strong>Email</strong>: {{email}} <br>
-          <strong>Website URL</strong>: {{site}} <br>
-          <strong>Comments</strong>: {{comments}}       </p>
+         <strong>Ubicación aproximada</strong><br>
+         <img src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=13&size=600x300&maptype=roadmap&markers={{lat}},{{lng}}&key={{context.key}}"><br>
+          <strong>Correo de contacto</strong>: {{email}}<br>
+          <strong>Descripción de la necesiad</strong>: {{description}}<br>
+          <strong>Tipo de necesidad</strong>: {{type}}</p>
      </div>
    </div>
  </body>

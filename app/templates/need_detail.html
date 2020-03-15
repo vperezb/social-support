@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  {% include '/default_head.html' %}
+</head>
+<body>
+{% include '/header.html' %}
+
+    <div id="container">
+      <div id="main">
+       <p>Esta es la información de tu publicación</p>
+       <p>Recibirás un correo con un enlace para activar/desactivar la publicación</p>
+       <p>Pasadas 24h sin actividad se procederá a desactivar. Podrás activar de nuevo desde el enlace del correo</p>
+       <h3>{{need.title}}</h3>
+       <p>
+         <strong>Ubicación aproximada</strong><br>
+         <img src="https://maps.googleapis.com/maps/api/staticmap?center={{need.lat}},{{need.lng}}&zoom=13&size=600x300&maptype=roadmap&markers={{need.lat}},{{need.lng}}&key={{context.key}}"><br>
+          <strong>Descripción de la necesiad</strong>: {{need.description}}<br>
+          <strong>Tipo de necesidad</strong>: {{need.type}}</p>
+     </div>
+   </div>
+ </body>
+</html>

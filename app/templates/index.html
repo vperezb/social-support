@@ -5,14 +5,10 @@
 </head>
 <body>
 {% include '/header.html' %}
-<h1>SuportSocial - covid19</h1>
 
-<!-- [END gae_python37_auth_firebase_html] -->
-
-<button onclick="window.location.href = '/need';">Necesito ayuda</button>
-<button type="button" onclick="window.location.href = '/offer';">Puedo ayudar</button>
 <h2>¿Cómo funciona?</h2>
 <h3>Si necesitas ayuda</h3>
+<button onclick="window.location.href = '/need';">Necesito ayuda</button>
 <p>
   <ul>
     <li>Publica tu necesidad, te pediremos un correo.</li>
@@ -22,6 +18,7 @@
   </ul>
 </p>
 <h3>Si puedes ayudar</h3>
+<button class='to_offer' type="button" onclick="window.location.href = '/offer';">Puedo ayudar</button>
 <p>
   <ul>
     <li>Busca necesidades CERCA de tu domicilio</li>
@@ -31,9 +28,9 @@
   </ul>
 </p>
 <h2>Links de interés</h2>
+
 <h3>Troba la teva ciutat</h3>
-
 <a href="/offer?z=41.501576,2.347731,12,1500">Premià de Dalt</a>
-
+{% include '/footer.html' %}
 </body>
 </html>

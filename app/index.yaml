@@ -5,3 +5,20 @@ indexes:
   properties:
   - name: timestamp
     direction: desc
+
+- kind: need
+  ancestor: yes
+  properties:
+  - name: status
+  - name: mgrs_6
+  - name: mgrs_8
+  - name: mgrs
+  - name: lat
+  - name: lng
+  - name: title
+  - name: description
+  - name: type
+  - name: hash
+  - name: p_hash
+  - name: timestamp
+    direction: desc
