@@ -30,6 +30,19 @@ def store_need(email, lat, lng, title, description, type):
 
     datastore_client.put(entity)
 
+def store_enroll(email, phone, comment, need_hash):
+    entity = datastore.Entity(key=datastore_client.key('User', email, 'enroll'))
+    entity.update({
+        'timestamp': datetime.datetime.now(),
+        'status' : 'just_enrolled',
+        'email': email,
+        'phone': phone,
+        'comment': comment,
+        'need_hash': need_hash
+    })
+
+    datastore_client.put(entity)
+
 def fetch_need(hash):
     query = datastore_client.query(kind='need')
     query.add_filter('hash', '=', hash)
@@ -79,6 +92,16 @@ def need_detail():
     need = fetch_need(hash)
     print(need)
     return render_template('need_detail.html', need = need, context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'}, )
+
+@app.route('/stored_enroll', methods=['POST'])
+def stored_enroll_form():
+    email = request.form['email']
+    phone = request.form['phone']
+    comment = request.form['comment']
+    need_hash = request.form['need_hash']
+    store_enroll(email, phone, comment, need_hash)
+    return 'OK'
+
 
 @app.route('/stored_need', methods=['POST'])
 def stored_need_form():
