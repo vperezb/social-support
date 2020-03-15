@@ -11,11 +11,11 @@
 </p>
 </footer>
 <script>
-    zone = getCookie('zone')
+    const zone = getCookie("zone");
     if (zone){
-      elements = document.getElementsByClassName('to_offer');
+      elements = document.querySelectorAll('[data="to-offer"]');
       for (var i=0, im=elements.length; im>i; i++) {
-        elements[i].setAttribute("onclick", "window.location.href = '/offer?z=" + zone + "';");
+        elements[i].setAttribute("href", `/offer?z=${zone}`);
       }
     }
 </script>
