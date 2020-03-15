@@ -1,38 +1,44 @@
 <!doctype html>
-<html>
+<html class="has-navbar-fixed-top">
+
 <head>
   {% include '/default_head.html' %}
 </head>
-<body>
-{% include '/header.html' %}
 
-    <div id="container">
-      <div id="main">
-       <p>Esta es la información de tu publicación</p>
-       <p>Recibirás un correo con un enlace para activar/desactivar la publicación</p>
-       <p>Pasadas 24h sin actividad se procederá a desactivar. Podrás activar de nuevo desde el enlace del correo</p>
-       <h3>{{need.title}}</h3>
-       <p>
-         <strong>Ubicación aproximada</strong><br>
-         <img src="https://maps.googleapis.com/maps/api/staticmap?center={{need.lat}},{{need.lng}}&zoom=13&size=600x300&maptype=roadmap&markers={{need.lat}},{{need.lng}}&key={{context.key}}"><br>
-          <strong>Descripción de la necesiad</strong>: {{need.description}}<br>
-          <strong>Tipo de necesidad</strong>: {{need.type}}</p>
-     </div>
-     <div style="border:solid 1px black;background-color: #f9ffac;">
-         <h2>Ofrecerme como ayudante</h2>
-         <form method="post" action="{{ url_for('stored_enroll_form') }}">
-            <label for="email">Correo:</label><input type="email" name="email"> o <label for="phone">Teléfono:</label><input type="phone" name="phone"><br>
-            <small>Rellena almenos el correo o teléfono, tus datos de contacto se van a enviar a la persona que ha publicado la necesidad</small><br>
-            <label for="comment">Comentario:</label><br>
-            <textarea name="comment" rows="6" cols="70"></textarea><br>
-            <input id="need_hash" name="need_hash" hidden>
-            <input type="submit" value="Enviar">
-          </form>        
-     </div>
-   </div>
-<script>
-  var urlParams = new URLSearchParams(window.location.search);
-  document.getElementById('need_hash').value = urlParams.get('h');
-</script>
- </body>
+<body>
+  {% include '/header.html' %}
+
+  <div id="container">
+    <div id="main">
+      <p>Esta es la información de tu publicación</p>
+      <p>Recibirás un correo con un enlace para activar/desactivar la publicación</p>
+      <p>Pasadas 24h sin actividad se procederá a desactivar. Podrás activar de nuevo desde el enlace del correo</p>
+      <h3>{{need.title}}</h3>
+      <p>
+        <strong>Ubicación aproximada</strong><br>
+        <img
+          src="https://maps.googleapis.com/maps/api/staticmap?center={{need.lat}},{{need.lng}}&zoom=13&size=600x300&maptype=roadmap&markers={{need.lat}},{{need.lng}}&key={{context.key}}"><br>
+        <strong>Descripción de la necesiad</strong>: {{need.description}}<br>
+        <strong>Tipo de necesidad</strong>: {{need.type}}</p>
+    </div>
+    <div style="border:solid 1px black;background-color: #f9ffac;">
+      <h2>Ofrecerme como ayudante</h2>
+      <form method="post" action="{{ url_for('stored_enroll_form') }}">
+        <label for="email">Correo:</label><input type="email" name="email"> o <label for="phone">Teléfono:</label><input
+          type="phone" name="phone"><br>
+        <small>Rellena almenos el correo o teléfono, tus datos de contacto se van a enviar a la persona que ha publicado
+          la necesidad</small><br>
+        <label for="comment">Comentario:</label><br>
+        <textarea name="comment" rows="6" cols="70"></textarea><br>
+        <input id="need_hash" name="need_hash" hidden>
+        <input type="submit" value="Enviar">
+      </form>
+    </div>
+  </div>
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    document.getElementById('need_hash').value = urlParams.get('h');
+  </script>
+</body>
+
 </html>
