@@ -1,21 +1,22 @@
 body {
-  font-family: "helvetica", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
+.table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.is-100vh {
+  height: 100vh;
+}
+
+tbody > tr:hover {
+  background-color: hsl(171, 100%, 41%);
+  color: white;
+}
+
+#map {
   width: 100%;
+  height: 500px;
 }
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-#map{ width:100%; height: 500px; }

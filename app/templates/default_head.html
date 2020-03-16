@@ -1,5 +1,5 @@
 <title>[ES] SocialSuport</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
 
@@ -7,21 +7,30 @@
    https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
 <script>
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyC5E9RhNjYYke9l1kEtjeKqAsINIIkqY98",
-  authDomain: "suportsocial.firebaseapp.com",
-  databaseURL: "https://suportsocial.firebaseio.com",
-  projectId: "suportsocial",
-  storageBucket: "suportsocial.appspot.com",
-  messagingSenderId: "803721971155",
-  appId: "1:803721971155:web:3394bbb938d15109f49b26",
-  measurementId: "G-E2WL0SDT5Z"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC5E9RhNjYYke9l1kEtjeKqAsINIIkqY98",
+    authDomain: "suportsocial.firebaseapp.com",
+    databaseURL: "https://suportsocial.firebaseio.com",
+    projectId: "suportsocial",
+    storageBucket: "suportsocial.appspot.com",
+    messagingSenderId: "803721971155",
+    appId: "1:803721971155:web:3394bbb938d15109f49b26",
+    measurementId: "G-E2WL0SDT5Z"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 </script>
-<link rel='icon' href='{{ url_for('static', filename='favicon.ico') }}' type='image/x-icon'/ >
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+
+<!-- Bulma dependencies -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<link rel='icon' href='{{ url_for('static', filename='favicon.ico') }}' type='image/x-icon' />
 <script src="{{ url_for('static', filename='script.js') }}"></script>
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
