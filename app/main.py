@@ -4,7 +4,13 @@ import uuid
 from flask import Flask, render_template, request
 from google.cloud import datastore
 import mgrs
+import yaml
 
+with open("credentials.yml", 'r') as stream:
+    try:
+       __credentials = yaml.safe_load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
 
 datastore_client = datastore.Client()
 
@@ -73,25 +79,25 @@ def offer():
 
         return render_template(
             'offer.html', 
-            context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'}, 
+            context={'key':__credentials['api_key']}, 
             zone={'lat':lat, 'lng':lng, 'zoom':zoom, 'distance':distance}, 
             needs=fetch_needs(lat, lng))
     else:
         return render_template(
             'select_zone.html',
-            context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'}, 
+            context={'key':__credentials['api_key']}, 
         )
 
 @app.route('/need')
 def need():
-    return render_template('need.html',context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'})
+    return render_template('need.html',context={'key':__credentials['api_key']})
 
 @app.route('/need_detail', methods=['GET'])
 def need_detail():
     hash = request.args.get('h')
     need = fetch_need(hash)
     print(need)
-    return render_template('need_detail.html', need = need, context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'}, )
+    return render_template('need_detail.html', need = need, context={'key':__credentials['api_key']}, )
 
 @app.route('/stored_enroll', methods=['POST'])
 def stored_enroll_form():
@@ -121,7 +127,7 @@ def stored_need_form():
             'type':type,
             'status':'toconfirm'
         },
-        context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'}
+        context={'key':__credentials['api_key']}
     )
 
 
@@ -129,7 +135,7 @@ def stored_need_form():
 def select_zone():
     return render_template(
         'select_zone.html',
-        context={'key':'AIzaSyAnmtePzc5y5TgEIj9ewyBDNyRvcNFzuNw'}
+        context={'key':__credentials['api_key']}
     )
 
 @app.route('/enable', methods=['GET'])
