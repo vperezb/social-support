@@ -1,80 +1,45 @@
 <!DOCTYPE html>
-<html class="has-navbar-fixed-top">
-
-<head>
-  {% include '/default_head.html' %}
-</head>
-
-<body>
+<html>
+  <head>
+    {% include '/default_head.html' %}
+  </head>
+  <body>
   {% include '/header.html' %}
+    
+    <h3>Ofrece tu ayuda - Selecciona tu zona de acción</h3> 
+    <button onClick="window.location.reload();">Actualizar</button><button onclick="copyUrlToClipboard()">Compartir página de búsqueda</button>
+    <button onclick="window.location='/select_zone';">Cambiar Zona</button>
+    
+<table>
+  <tr>
+    <th>Distancia</th>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>Respuestas</th>
+  </tr>
+  {% for need in needs %}
+  <TR  onclick="window.location='/need_detail?h={{need.hash}}';"  style="cursor:pointer">
+     <TD>{{need.hash}}</TD>
+     <TD>{{need.title}}</TD>
+     <TD>{{need.description}}</TD>
+     <td>0</td> 
+  </TR>
+  {% endfor %}
+  </table>
 
-
-  <div class="container is-100vh">
-    <h1 class="title">Ofrece tu ayuda</h1>
-    <h2 class="subtitle">Encuentra una necesidad en la que puedas ayudar</h2>
-
-
-    <div class="buttons has-addons is-centered">
-      <button class="button" onclick="window.location.reload();">Actualizar 🔄</button>
-      <button class="button" id="#show-modal-copy" onclick="copyUrlToClipboard()">Compartir página de búsqueda
-        🔗</button>
-      <button class="button" onclick="window.location='/select_zone';">
-        Cambiar mi zona 📍
-      </button>
-    </div>
-
-    <div class="modal">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Confirmación</p>
-        </header>
-        <section class="modal-card-body">
-          <!-- Content ... -->
-          ¡Enlace copiado exitosamente! 🙌
-        </section>
-      </div>
-    </div>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th><abbr title="Título">Título</abbr></th>
-          <th class="is-hidden-mobile"><abbr title="Descripción">Descripción</abbr></th>
-          <th><abbr title="Fecha de publicación">Fecha</abbr></th>
-          <th><abbr title="Categoría">Categoría</abbr></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for need in needs %}
-        <tr onclick="window.location='/need_detail?h={{need.hash}}';" style="cursor:pointer">
-          <td>{{need.title}}</td>
-          <td class="is-hidden-mobile">{{need.description}}</td>
-          <td>{{need.timestamp.strftime('%d-%m-%Y')}}</td>
-          <td>{{need.type}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-
-  <script>
+<script>
     function copyUrlToClipboard() {
-      var dummy = document.createElement('input'),
-        text = window.location.href;
-      document.body.appendChild(dummy);
-      text = text + '&utm_medium=share';
-      dummy.value = text
-      dummy.select();
-      document.execCommand('copy');
-      const modal = document.querySelector('.modal');
-      modal.classList.add('is-active');
-      setTimeout(() => modal.classList.remove('is-active'), 2000);
-      document.body.removeChild(dummy);
+        var dummy = document.createElement('input'),
+            text = window.location.href;
+        document.body.appendChild(dummy);
+        text = text + '&utm_medium=share';
+        dummy.value = text
+        dummy.select();
+        document.execCommand('copy');
+        alert("Enllaç copiat, pots compartir-lo per Watsapp, mail...: ");
+        document.body.removeChild(dummy);
     }
-  </script>
-  {% include '/footer.html' %}
+</script>
+{% include '/footer.html' %}
 </body>
-
 </html>

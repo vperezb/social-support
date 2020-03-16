@@ -22,14 +22,3 @@ indexes:
   - name: p_hash
   - name: timestamp
     direction: desc
-
-- kind: enroll
-  ancestor: yes
-  properties:
-  - name: need_hash
-  - name: status
-  - name: title
-  - name: description
-  - name: type
-  - name: timestamp
-    direction: desc

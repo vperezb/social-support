@@ -1,10 +1,22 @@
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>
-            <strong>Social Support [ES]</strong> <a href="https://github.com/vperezb/social-support"
-                target="_blank">Github</a>
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
-            Made with 🧡 by <a href="https://github.com/vperezb/">Víctor Pérez</a> & <a href="https://github.com/alfdocimo/">Alfredo Narváez</a>
-        </p>
-    </div>
+<footer>
+<p>
+    <ul>
+        <li>
+            <a href="#">Github</a>
+        </li>
+        <li>
+            <a href="/support_us">Ayúdanos</a>
+        </li>
+    </ul>
+</p>
 </footer>
+<script>
+    zone = getCookie('zone')
+    if (zone){
+      elements = document.getElementsByClassName('to_offer');
+      for (var i=0, im=elements.length; im>i; i++) {
+        elements[i].setAttribute("onclick", "window.location.href = '/offer?z=" + zone + "';");
+      }
+    }
+</script>
+    

@@ -1,10 +1,1 @@
-.vscode/
-
-# Env
 venv/
-
-# Credentials
-app/credentials.yml
-
-# Prototyping Notebooks
-*.ipynb
