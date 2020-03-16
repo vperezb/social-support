@@ -50,7 +50,7 @@
         <tr onclick="window.location='/need_detail?h={{need.hash}}';" style="cursor:pointer">
           <td>{{need.title}}</td>
           <td class="is-hidden-mobile">{{need.description}}</td>
-          <td>{{need.timestamp.strftime('%d-%m-%Y')}}</td>
+          <td>{{need.timestamp.strftime(("%m/%d/%Y, %H:%M:%S"))}}</td>
           <td>{{need.type}}</td>
         </tr>
         {% endfor %}
