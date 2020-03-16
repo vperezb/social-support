@@ -8,15 +8,25 @@
 <body>
   {% include '/header.html' %}
 
-  <h3>Ofrece tu ayuda - Selecciona tu zona de acción</h3>
-  <p>Muévete por el mapa o busca y selecciona una zona <b>cercana a tu domicilio</b></p>
-  <!--The div element for the map -->
-  Selecciona tu zona: <input id="query-box" class="controls" type="text" placeholder="Pueblo o barrio"> |
-  Distancia (max. 2000 metros): <input id="distance" name="distance" class="controls" type="number" placeholder=""
-    value="1000" max="2000">
-  <br>
-  <div id="map"></div>
-  <button onclick="selectOfferZone()">Seleccionar esta zona</button>
+  <div class="container is-100vh">
+    <div class="columns">
+      <div class="column">
+        <h3>Ofrece tu ayuda - Selecciona tu zona de acción</h3>
+        <p>Muévete por el mapa o busca y selecciona una zona <b>cercana a tu domicilio</b></p>
+        <!--The div element for the map -->
+        Selecciona tu zona: <input id="query-box" class="controls" type="text" placeholder="Pueblo o barrio"> |
+        Distancia (max. 2000 metros): <input id="distance" name="distance" class="controls" type="number" placeholder=""
+          value="1000" max="2000">
+        <br>
+
+        <button onclick="selectOfferZone()">Seleccionar esta zona</button>
+      </div>
+      <div class="column">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     function initAutocomplete() {
       var center = { lat: 39.9776665, lng: -4.7622723 }

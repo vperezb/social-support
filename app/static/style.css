@@ -11,6 +11,10 @@ body {
   height: 100vh;
 }
 
+.has-padding-10 {
+  padding-top: 10px;
+}
+
 tbody > tr:hover {
   background-color: hsl(171, 100%, 41%);
   color: white;
