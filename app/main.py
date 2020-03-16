@@ -6,7 +6,7 @@ from google.cloud import datastore
 import mgrs
 import yaml
 
-with open("credentials.yml", 'r') as stream:
+with open("credentials.yaml", 'r') as stream:
     try:
        __credentials = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
@@ -125,7 +125,8 @@ def stored_need_form():
             'title':title,
             'description':description,
             'type':type,
-            'status':'toconfirm'
+            'status':'toconfirm',
+            'timestamp': datetime.datetime.now(),
         },
         context={'key':__credentials['api_key']}
     )
