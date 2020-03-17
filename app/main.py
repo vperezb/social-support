@@ -29,7 +29,7 @@ def store_need(email, lat, lng, title, description, type):
         'title': title,
         'description': description,
         'type': type,
-        'status' : 'toconfirm',
+        'status' : 'enabled',
         'hash': uuid.uuid4().hex,
         'p_hash': uuid.uuid4().hex
     })
@@ -49,6 +49,14 @@ def store_enroll(email, phone, comment, need_hash):
 
     datastore_client.put(entity)
 
+
+def change_need_status(key, status):
+    task = datastore_client.get(key)
+    task['status'] = status
+    datastore_client.put(task)
+    return True
+
+
 def fetch_need(hash):
     query = datastore_client.query(kind='need')
     query.add_filter('hash', '=', hash)
@@ -59,7 +67,8 @@ def fetch_need(hash):
 def fetch_needs(lat, lng):
     needs_mgrs = mgrs.MGRS().toMGRS(lat, lng).decode('UTF-8')
     query = datastore_client.query(kind='need')
-    query.add_filter('status', '=', 'toconfirm')
+    #query.add_filter('status', '=',  'toconfirm')
+    query.add_filter('status', '=',  'enabled')
     query.add_filter('mgrs_6', '=', needs_mgrs[:6])
     needs = query.fetch(limit=20)
     return needs
@@ -96,7 +105,6 @@ def need():
 def need_detail():
     hash = request.args.get('h')
     need = fetch_need(hash)
-    print(need)
     return render_template('need_detail.html', need = need, context={'key':__credentials['api_key']}, )
 
 @app.route('/stored_enroll', methods=['POST'])
@@ -139,9 +147,26 @@ def select_zone():
         context={'key':__credentials['api_key']}
     )
 
+
 @app.route('/enable', methods=['GET'])
 def enable():
+    hash = request.args.get('h')
+    p_hash = request.args.get('p')
+    need = fetch_need(hash)
+    #if (need['p_hash'] == p_hash)
+    change_need_status(need.key, 'enabled')
     return('done')
+
+
+@app.route('/disable', methods=['GET'])
+def disable():
+    hash = request.args.get('h')
+    p_hash = request.args.get('p')
+    need = fetch_need(hash)
+    #if (need['p_hash'] == p_hash)
+    change_need_status(need.key, 'disabled')
+    return('done')
+
 
 @app.route('/support_us', methods=['GET'])
 def suport_us():
