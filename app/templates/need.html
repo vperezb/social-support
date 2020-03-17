@@ -15,7 +15,7 @@
     <div class="columns">
       <!-- Info Layout-->
       <div class="column">
-        <form method="post" action="{{ url_for('stored_need_form') }}">
+        <form method="post" action="{{ url_for('stored_need_form') }}" id="stored_need_form">
 
           <!-- Titulo Init-->
           <div class="field">
@@ -113,6 +113,13 @@
         rotateControl: true,
         fullscreenControl: true
       });
+
+      document.getElementById("stored_need_form").onkeypress = function (e) {
+        var key = e.charCode || e.keyCode || 0;
+        if (key == 13) {
+          e.preventDefault();
+        }
+      }
 
       // Create the search box and link it to the UI element.
       var input = document.getElementById('query-box');

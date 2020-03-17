@@ -15,6 +15,16 @@ body {
   padding-top: 10px;
 }
 
+.has-centered-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.is-absolute {
+  position: absolute;
+}
+
 tbody > tr:hover {
   background-color: hsl(171, 100%, 41%);
   color: white;
