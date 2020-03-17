@@ -9,17 +9,30 @@
   {% include '/header.html' %}
 
   <div class="container is-100vh">
+    <h1 class="title">Ofrece tu ayuda - Selecciona tu zona de acción</h1>
+
+    <h2 class="subtitle">
+      Muévete por el mapa o busca y selecciona una zona <b>cercana a tu domicilio
+    </h2>
     <div class="columns">
       <div class="column">
-        <h3>Ofrece tu ayuda - Selecciona tu zona de acción</h3>
-        <p>Muévete por el mapa o busca y selecciona una zona <b>cercana a tu domicilio</b></p>
-        <!--The div element for the map -->
-        Selecciona tu zona: <input id="query-box" class="controls" type="text" placeholder="Pueblo o barrio"> |
-        Distancia (max. 2000 metros): <input id="distance" name="distance" class="controls" type="number" placeholder=""
-          value="1000" max="2000">
-        <br>
 
-        <button onclick="selectOfferZone()">Seleccionar esta zona</button>
+        <div class="field">
+          <label class="label">Selecciona tu zona:</label>
+          <div class="control">
+            <input type="email" id="query-box" class="input" type="text" placeholder="Pueblo o barrio">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Distancia (max. 2000 metros):</label>
+          <div class="control">
+            <input id="distance" name="distance" class="input" type="number" placeholder="" value="1000" max="2000">
+          </div>
+        </div>
+
+        <button class="button is-primary is-fullwidth" onclick="selectOfferZone()">Seleccionar esta zona</button>
+
       </div>
       <div class="column">
         <div id="map"></div>
