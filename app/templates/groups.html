@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+
+<head>
+  {% include '/default_head.html' %}
+</head>
+
+<body>
+  {% include '/header.html' %}
+
+
+  <div class="container is-100vh">
+    <h1 class="title">Grupos de ayuda</h1>
+    <h2 class="subtitle">Encuentra un grupo de ayuda cerca de ti o publica tu necesidad.</h2>
+
+
+    <div class="buttons has-addons is-centered">
+      <button class="button" id="#show-modal-copy" onclick="copyUrlToClipboard()">Compartir 🔗</button>
+      <button class="button" onclick="window.location='/select_zone';">
+        Cambiar mi zona 📍
+      </button>
+      <!-- <button class="button is-warning" onclick="window.location='/select_zone';">
+        Crear necesidad
+      </button> -->
+    </div>
+
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Confirmación</p>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          ¡Enlace copiado exitosamente! 🙌
+        </section>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th><abbr title="Nombre del colectivo">Nombre</abbr></th>
+          <th><abbr title="Descripción del colectivo">Descripción</abbr></th>
+          <!-- <th><abbr title="Categoría del colectivo">Categoría</abbr></th>
+          <th><abbr title="Tipo del recurso">Tipo</abbr></th> -->
+        </tr>
+      </thead>
+      <tbody>
+          <tr onclick="window.location='http://www.premiadedalt.cat/news/lajuntament-obre-una-xarxa-de-persones-col-laboradores-per-atendre-necessitats-pel-coronavirus';" style="cursor:pointer">
+            <td>Xarxa solidària Premià de Dalt</td>
+            <td>Es tracta d’una iniciativa solidària i de participació ciutadana per ajudar a atendre gent que visqui dificultats per la pandèmia del COVID19</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  {% include '/footer.html' %}
+</body>
+
+</html>
