@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import main
+from flask import json
 
 
 def test_index():
@@ -21,3 +22,12 @@ def test_index():
 
     r = client.get('/')
     assert r.status_code == 200
+
+
+    r = client.get('/jotason',content_type='application/json')
+    data = json.loads(r.get_data(as_text=True))
+
+    assert data == {
+        'test':'hola marico',
+        'enough':'?'
+    }

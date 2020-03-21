@@ -7,36 +7,91 @@
 
 <body>
   {% include '/header.html' %}
-  <div id="container">
-    <div class="pagetitle">
-      <h2>¿Qué necesitas?</h2>
-    </div>
-    <div id="main">
-      <form method="post" action="{{ url_for('stored_need_form') }}">
-        <label for="title">Título:</label><input type="text" name="title">
-        <label for="type">Tipo:</label>
-        <select id="type" name="type">
-          <option value="groceries">Hacer la compra</option>
-          <option value="children-care">Canguro</option>
-          <option value="other">Otro</option>
-        </select><br>
-        <label for="description">Descripción:</label><br>
-        <textarea name="description" rows="6" cols="70"></textarea><br>
-        <small>No es aconsejable dar excesivos detalles, ya se acordará por privado.</small><br>
-        <label for="email">Correo:</label>
-        <input type="email" name="email"><br>
-        <small>El correo no se va a enviar a nadie, servirá para enviarte el contacto cuando alguien esté interesado.</small><br>
-        <input type="text" name="lat" id="lat" readonly="yes" hidden>
-        <input type="text" name="lng" id="lng" readonly="yes" hidden>
-        Selecciona tu zona: <input id="query-box" class="controls" type="text" placeholder="Pueblo o barrio"><br> 
-        <input id="distance" name="distance" class="controls" type="number" placeholder="" value="1000" max="2000" hidden>
-        <small>No es aconsejable utilizar la dirección exacta (utilizar el barrio, por ejemplo), ya se acordará por privado.</small>
-        <input type="submit">
+
+  <div class="container is-100vh">
+    <h1 class="title">¿Qué necesitas?</h1>
+    <h2 class="subtitle">Explica a los demás qué es lo que necesitas</h2>
+
+    <div class="columns">
+      <!-- Info Layout-->
+      <div class="column">
+        <form method="post" action="{{ url_for('stored_need_form') }}" id="stored_need_form">
+
+          <!-- Titulo Init-->
+          <div class="field">
+            <label class="label">Titulo</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Introduce un título" name="title">
+            </div>
+          </div>
+          <!-- Titulo End-->
+
+          <!-- Tipo Init-->
+          <div class="field">
+            <label class="label">Tipo</label>
+            <div class="control">
+              <div class="select">
+                <select id="type" name="type">
+                  <option value="groceries">Hacer la compra</option>
+                  <option value="children-care">Canguro</option>
+                  <option value="other">Otro</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Tipo End-->
+
+          <!-- Desc Init-->
+          <div class="field">
+            <label class="label" for="description">Descripción</label>
+            <div class="control">
+              <textarea class="textarea" name="description" placeholder="Textarea"></textarea>
+            </div>
+          </div>
+          <!-- Desc End-->
+
+          <!-- Correo Init-->
+          <div class="field">
+            <label class="label" for="email">Correo</label>
+            <div class="control">
+              <input class="input" type="email" name="email" placeholder="Introduce un correo">
+            </div>
+          </div>
+          <!-- Correo End-->
+
+          <!-- Zona Init-->
+          <div class="field">
+            <label class="label" for="zone">Selecciona tu zona</label>
+            <small>No es aconsejable utilizar la dirección exacta (utilizar el barrio, por ejemplo), ya se acordará por
+              privado.
+            </small>
+            <div class="control">
+              <input class="input" id="query-box" type="text" placeholder="Pueblo o barrio">
+            </div>
+          </div>
+          <!-- Zona End-->
+
+          <input type="text" name="lat" id="lat" readonly="yes" hidden>
+          <input type="text" name="lng" id="lng" readonly="yes" hidden>
+          <input id="distance" name="distance" class="controls" type="number" placeholder="" value="1000" max="2000"
+            hidden>
+
+          <div class="control has-text-centered">
+            <input type="submit" class="button is-warning is-fullwidth">
+          </div>
+
+        </form>
+      </div>
+
+      <div class="column">
         <div id="map"></div>
-        
-      </form>       
+      </div>
     </div>
+
+
+
   </div>
+
   <script>
     // This example adds a search box to a map, using the Google Place Autocomplete
     // feature. People can enter geographical searches. The search box will return a
@@ -48,30 +103,37 @@
 
     function initAutocomplete() {
       var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 39.9776665, lng: -4.7622723},
+        center: { lat: 39.9776665, lng: -4.7622723 },
         zoom: 6,
         mapTypeId: 'roadmap',
-          zoomControl: true,
-          mapTypeControl: false,
-          scaleControl: true,
-          streetViewControl: false,
-          rotateControl: true,
-          fullscreenControl: true
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: true,
+        streetViewControl: false,
+        rotateControl: true,
+        fullscreenControl: true
       });
+
+      document.getElementById("stored_need_form").onkeypress = function (e) {
+        var key = e.charCode || e.keyCode || 0;
+        if (key == 13) {
+          e.preventDefault();
+        }
+      }
 
       // Create the search box and link it to the UI element.
       var input = document.getElementById('query-box');
       var searchBox = new google.maps.places.SearchBox(input);
 
       // Bias the SearchBox results towards current map's viewport.
-      map.addListener('bounds_changed', function() {
+      map.addListener('bounds_changed', function () {
         searchBox.setBounds(map.getBounds());
       });
 
       var markers = [];
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
-      searchBox.addListener('places_changed', function() {
+      searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
         if (places.length == 0) {
@@ -79,14 +141,14 @@
         }
 
         // Clear out the old markers.
-        markers.forEach(function(marker) {
+        markers.forEach(function (marker) {
           marker.setMap(null);
         });
         markers = [];
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
+        places.forEach(function (place) {
           if (!place.geometry) {
             console.log("Returned place contains no geometry");
             return;
@@ -116,8 +178,10 @@
     }
 
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key={{context.key}}&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{context.key}}&libraries=places&callback=initAutocomplete"
+    async defer></script>
 
-{% include '/footer.html' %}
+  {% include '/footer.html' %}
 </body>
+
 </html>

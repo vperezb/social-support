@@ -8,33 +8,75 @@
 <body>
   {% include '/header.html' %}
 
-  <div id="container">
-    <div id="main">
-      <p>Esta es la información de tu publicación</p>
-      <p>Recibirás un correo con un enlace para activar/desactivar la publicación</p>
-      <p>Pasadas 24h sin actividad se procederá a desactivar. Podrás activar de nuevo desde el enlace del correo</p>
-      <h3>{{need.title}}</h3>
-      <p>
-        <strong>Ubicación aproximada</strong><br>
+  <div class="container is-100vh">
+
+    <div class="columns">
+      <!-- Info Layout-->
+      <div class="column">
+
+        <h1 class="title">{{need.title}}</h1>
+        <h6 class="subtitle is-6">
+          Fecha de publicación: {{need.timestamp.strftime("%m/%d/%Y, %H:%M:%S")}}
+        </h6>
+        <h2 class="subtitle">
+          {{need.description}}
+        </h2>
+        <h2 class="subtitle">
+          <a style="background-color: green;color: white;" href="/enable?h={{need.hash}}">ENABLE</a>
+          <a style="background-color: red;color:white" href="/disable?h={{need.hash}}">DISABLE</a> 
+        </h2>
+      </div>
+      <!-- Map-->
+      <div class="column has-text-centered">
+
         <img
-          src="https://maps.googleapis.com/maps/api/staticmap?center={{need.lat}},{{need.lng}}&zoom=13&size=600x300&maptype=roadmap&markers={{need.lat}},{{need.lng}}&key={{context.key}}"><br>
-        <strong>Descripción de la necesiad</strong>: {{need.description}}<br>
-        <strong>Tipo de necesidad</strong>: {{need.type}}</p>
+          src="https://maps.googleapis.com/maps/api/staticmap?center={{need.lat}},{{need.lng}}&zoom=13&size=480x320&maptype=roadmap&markers={{need.lat}},{{need.lng}}&key={{context.key}}">
+
+      </div>
     </div>
-    <div style="border:solid 1px black;background-color: #f9ffac;">
-      <h2>Ofrecerme como ayudante</h2>
-      <form method="post" action="{{ url_for('stored_enroll_form') }}">
-        <label for="email">Correo:</label><input type="email" name="email"> o <label for="phone">Teléfono:</label><input
-          type="phone" name="phone"><br>
-        <small>Rellena almenos el correo o teléfono, tus datos de contacto se van a enviar a la persona que ha publicado
-          la necesidad</small><br>
-        <label for="comment">Comentario:</label><br>
-        <textarea name="comment" rows="6" cols="70"></textarea><br>
-        <input id="need_hash" name="need_hash" hidden>
-        <input type="submit" value="Enviar">
-      </form>
+
+    <div class="has-background-light">
+      <div class="container is-fluid">
+
+        <form method="post" action="{{ url_for('stored_enroll_form') }}">
+          <div class="container">
+            <h4 class="subtitle is-4 has-text-centered has-padding-10">Ofrecerme como ayudante</h4>
+          </div>
+          <div class="field">
+            <label class="label">Correo</label>
+            <div class="control">
+              <input class="input" type="email" placeholder="Introduce un correo" name="email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Teléfono</label>
+            <div class="control">
+              <input class="input" type="tel" placeholder="Introduce un teléfono" name="phone">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="comment">Comentario</label>
+            <div class="control">
+              <textarea class="textarea" name="comment" placeholder="Comentario"></textarea>
+            </div>
+          </div>
+
+          <input id="need_hash" name="need_hash" hidden>
+          <section class="section">
+            <div class="container">
+              <div class="control has-text-centered">
+                <input type="submit" class="button is-primary" value="Enviar">
+              </div>
+            </div>
+          </section>
+
+        </form>
+      </div>
     </div>
   </div>
+
   <script>
     var urlParams = new URLSearchParams(window.location.search);
     document.getElementById('need_hash').value = urlParams.get('h');
