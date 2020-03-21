@@ -47,10 +47,12 @@
         </tr>
       </thead>
       <tbody>
-          <tr onclick="window.location='http://www.premiadedalt.cat/news/lajuntament-obre-una-xarxa-de-persones-col-laboradores-per-atendre-necessitats-pel-coronavirus';" style="cursor:pointer">
-            <td>Xarxa solidària Premià de Dalt</td>
-            <td>Es tracta d’una iniciativa solidària i de participació ciutadana per ajudar a atendre gent que visqui dificultats per la pandèmia del COVID19</td>
-          </tr>
+        {% for group in groups %}
+        <tr onclick="window.location='/group/{{group.hash}}';" style="cursor:pointer">
+          <td>{{group.name}}</td>
+          <td>{{group.description}}</td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
