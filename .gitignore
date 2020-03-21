@@ -6,5 +6,9 @@ venv/
 # Credentials
 app/credentials.yaml
 
+# Testing
+app/__pycache__
+app/.pytest_cache
+
 # Prototyping Notebooks
 *.ipynb

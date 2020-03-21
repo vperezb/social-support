@@ -2,6 +2,7 @@ import datetime
 import uuid
 
 from flask import Flask, render_template, request
+from flask import jsonify
 from google.cloud import datastore
 import mgrs
 import yaml
@@ -171,6 +172,14 @@ def disable():
 @app.route('/support_us', methods=['GET'])
 def suport_us():
     return render_template('support_us.html')
+
+@app.route('/jotason')
+def summary():
+    d = {
+        'test':'hola marico',
+        'enough':'?'
+    }
+    return jsonify(d)
 
 
 if __name__ == '__main__':
