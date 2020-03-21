@@ -8,3 +8,4 @@ app/credentials.yaml
 
 # Prototyping Notebooks
 *.ipynb
+*.ipynb_checkpoints

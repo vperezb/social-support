@@ -2,7 +2,7 @@ import datetime
 import uuid
 
 from flask import Flask, render_template, request
-from google.cloud import datastore
+from google.cloud import datastore    
 import mgrs
 import yaml
 
@@ -12,7 +12,7 @@ with open("credentials.yaml", 'r') as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-datastore_client = datastore.Client()
+datastore_client = datastore.Client(__credentials['project_id'])
 
 app = Flask(__name__)
 
@@ -78,6 +78,12 @@ def fetch_needs(lat, lng):
 def root():
     return render_template(
         'index.html')
+
+
+@app.route('/groups')
+def groups():
+    return render_template(
+        'groups.html')
 
 
 @app.route('/offer', methods=['GET'])
