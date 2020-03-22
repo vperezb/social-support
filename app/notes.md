@@ -12,11 +12,15 @@
 * Clean indexes and keep the ones defined:
     * gcloud datastore indexes cleanup index.yaml
 
-## Restful API design guidelines
+## Restful API design
 * https://stoplight.io/blog/crud-api-design/
 * https://opensource.zalando.com/restful-api-guidelines/index.html#introduction
 * https://github.com/whitehouse/api-standards
 * https://geemus.gitbooks.io/http-api-design/content/en/
+* https://martinfowler.com/bliki/TolerantReader.html
+* https://flask-oauthlib.readthedocs.io/en/latest/oauth2.html
+* https://blog.miguelgrinberg.com/post/designing-a-restful-api-using-flask-restful
+* https://flask-restplus.readthedocs.io/en/stable/swagger.html#documenting-with-the-api-doc-decorator
 
 ### Flask-Restplus
 

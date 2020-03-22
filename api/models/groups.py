@@ -20,7 +20,7 @@ datastore_client = datastore.Client(__credentials['project_id'])
 def store_group(name, description, url, lat, lng, email):
     translated_mgrs = mgrs.MGRS().toMGRS(lat, lng).decode('UTF-8')
     entity = datastore.Entity(key=datastore_client.key('group'))
-    entity.update({
+    public_info_to_put = {
         'timestamp': datetime.datetime.now(),
         'lat': lat,
         'lng': lng,
@@ -32,10 +32,15 @@ def store_group(name, description, url, lat, lng, email):
         'description': description,
         'status' : 'disabled',
         'hash': uuid.uuid4().hex,
-        'p_hash': uuid.uuid4().hex
-    })
+    }
 
-    datastore_client.put(entity)
+    private_info_to_put = public_info_to_put.copy()
+
+    private_info_to_put['p_hash'] = uuid.uuid4().hex
+    entity.update(private_info_to_put)
+    print(datastore_client.put(entity))
+    return public_info_to_put
+    
 
 
 def fetch_group(hash):
