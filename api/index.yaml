@@ -1,0 +1,17 @@
+indexes:
+
+- kind: group
+  ancestor: no
+  properties:
+  - name: mgrs
+  - name: mgrs_6
+  - name: mgrs_8
+  - name: timestamp
+  - name: lat
+  - name: lng
+  - name: name
+  - name: description
+  - name: status
+  - name: hash
+  - name: p_hash
+  - name: score

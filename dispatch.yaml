@@ -1,0 +1,6 @@
+dispatch:
+  - url: "suportsocial.appspot.com/*"
+    service: app
+  # Send all api calls to api application
+  - url: "api-dot-suportsocial.appspot.com/*"
+    service: api

@@ -1,7 +1,7 @@
 import datetime
 import uuid
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from google.cloud import datastore    
 import mgrs
 import yaml
@@ -126,6 +126,13 @@ def groups():
     return render_template(
         'groups.html')
 
+@app.route('/jotason')
+def summary():
+    d = {
+        'test':'hola marico',
+        'enough':'?'
+    }
+    return jsonify(d)
 
 @app.route('/offer', methods=['GET'])
 def offer():
