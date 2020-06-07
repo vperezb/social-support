@@ -11,6 +11,11 @@
 
 * Clean indexes and keep the ones defined:
     * gcloud datastore indexes cleanup index.yaml
+$ gcloud auth list
+$ gcloud config configurations list
+$ gcloud config list --all
+ gcloud auth activate-service-account sandbox-product@tiendeo-sandbox-projects.iam.gserviceaccount.com --key-file="
+C:/Users/Orwell/.credentials/tiendeo-sandbox-projects-58bfac812e72.json"
 
 ## Restful API design
 * https://stoplight.io/blog/crud-api-design/
